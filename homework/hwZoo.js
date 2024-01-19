@@ -63,4 +63,12 @@ console.log(anim3.species);
 console.log(anim3.scale_type);
 
 
+class Zoo extends Animal {
+    constructor() {
+        super();
+        
+    }
+}
+
+
 
