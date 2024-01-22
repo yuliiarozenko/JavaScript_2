@@ -25,10 +25,6 @@ class Mammal extends Animal {
         return this.#full_color;
     }
 }
-const anim1 = new Mammal('Kuzya', 'tiger', 'orange');
-console.log(anim1.name);
-console.log(anim1.species);
-console.log(anim1.full_color);
 
 class Bird extends Animal {
     #wing_span;
@@ -41,11 +37,6 @@ class Bird extends Animal {
     }
 }
 
-const anim2 = new Bird('Kesha', 'eagle', '2m');
-console.log(anim2.name);
-console.log(anim2.species);
-console.log(anim2.wing_span);
-
 class Reptile extends Animal {
     #scale_type;
     constructor(name, species, scale_type) {
@@ -57,18 +48,56 @@ class Reptile extends Animal {
     }
 }
 
-const anim3 = new Reptile('Karl', 'snake', 'smooth');
-console.log(anim3.name);
-console.log(anim3.species);
-console.log(anim3.scale_type);
-
-
-class Zoo extends Animal {
+class Zoo {
     constructor() {
-        super();
-        
+        this.animals = [];    
+    }
+
+    add_animal(animal) {
+        this.animals.push(animal);
+    }
+
+    list_animals() {
+        this.animals.forEach(animal => {
+            console.log(`Name: ${animal.name}, Species: ${animal.species}`);
+        })
+    }
+
+    get_animals_by_species(species) {
+        const filteredAnimals = this.animals.filter(animal => animal.species === species);
+
+        filteredAnimals.forEach(animal => {
+            console.log(`Name: ${animal.name}, Species: ${animal.species}`);
+        })
+    }
+
+    remove_animal(name) {
+        this.animals = this.animals.filter(animal => animal.name !== name);
+    }
+
+    count_animals() {
+        return this.animals.length;
     }
 }
 
+const zoo = new Zoo();
 
+const anim1 = new Mammal('Kuzya', 'tiger', 'orange');
+zoo.add_animal(anim1);
 
+const anim2 = new Bird('Kesha', 'eagle', '2m');
+zoo.add_animal(anim2);
+
+const anim3 = new Reptile('Karl', 'snake', 'smooth');
+zoo.add_animal(anim3);
+
+console.log('All Animals:');
+zoo.list_animals();
+
+console.log('\nBird');
+zoo.get_animals_by_species('Bird');
+
+console.log('\nRemoving Kuzya the tiger');
+zoo.remove_animal('Kyzya');
+
+console.log('\nTotal number of animals in the zoo: ' + zoo.count_animals());
